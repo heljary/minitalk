@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   minitalk_bonus.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: heljary <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 13:01:47 by heljary           #+#    #+#             */
-/*   Updated: 2025/01/27 13:01:50 by heljary          ###   ########.fr       */
+/*   Created: 2025/01/28 19:38:26 by heljary           #+#    #+#             */
+/*   Updated: 2025/01/28 19:38:41 by heljary          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#ifndef MINITALK_BONUS_H
+# define MINITALK_BONUS_H
 # define _GNU_SOURCE
 # include <signal.h>
 # include <unistd.h>
