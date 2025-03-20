@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: heljary <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: heljary <heljary@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 19:37:16 by heljary           #+#    #+#             */
-/*   Updated: 2025/01/28 19:37:20 by heljary          ###   ########.fr       */
+/*   Updated: 2025/03/20 06:37:46 by heljary          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk_bonus.h" 
+
+void sa_hand(int sig)
+{
+    if(sig == SIGUSR1)
+    {
+        ft_putstr("OK !\n");
+    }
+}
 
 void send_sig(int pid,char c)
 {
@@ -34,18 +42,15 @@ void send_sig(int pid,char c)
             }
         }
         bit++;
-        usleep(1);
+        usleep(100);
     } 
 }
 
-
 int main(int ac,char **av)
 {   
-
+    signal(SIGUSR1, sa_hand);
     int i = 0;
     int pid = ft_atoi(av[1]);
-    ft_putnbr(getpid());
-    // signal();
     char *message = av[2];
     if(ac <= 2)
     {
@@ -59,5 +64,6 @@ int main(int ac,char **av)
         send_sig(pid,message[i]);
         i++;
     }
+    send_sig(pid, '\0');
     return 0;
 }

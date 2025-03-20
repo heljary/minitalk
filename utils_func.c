@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_func.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: heljary <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: heljary <heljary@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 19:31:21 by heljary           #+#    #+#             */
-/*   Updated: 2025/01/28 19:31:28 by heljary          ###   ########.fr       */
+/*   Updated: 2025/03/19 00:38:07 by heljary          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ void	ft_putnbr(int n)
 		ft_putchar(n + 48);
 }
 
-int	ft_atoi(const char *str)
+long	ft_atoi(const char *str)
 {
 	int		i;
 	int		sign;
-	int		result;
+	long		result;
 
 	i = 0;
 	sign = 1;
@@ -75,6 +75,8 @@ int	ft_atoi(const char *str)
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		if (result > 2147483647)
+			return (-1);
+		if (result < -2147483648)
 			return (-1);
 		result = result * 10 + (str[i] - '0');
 		i++;

@@ -3,23 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: heljary <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: heljary <heljary@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:01:07 by heljary           #+#    #+#             */
-/*   Updated: 2025/01/27 13:01:13 by heljary          ###   ########.fr       */
+/*   Updated: 2025/03/20 03:36:04 by heljary          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "minitalk.h"
 
-unsigned char c;
-
-void signal_handler(int sig)
+void signal_handler(int sig, siginfo_t *info, void *context)
 {
-    
     static int count_bit;
+    static int l_client;
+    unsigned char c;
 
+    (void)context;
+    if(l_client != info->si_pid)
+    {
+        l_client = info->si_pid;
+        c = 0;
+        count_bit = 0;
+    }    
     if(sig == SIGUSR2)
     {
         c |= ( 1 << count_bit);
@@ -35,12 +41,15 @@ void signal_handler(int sig)
         c = 0;
         count_bit = 0;
     }
+    return;
 }
 
 int main()
 {
     struct sigaction sa;
-    sa.sa_handler = signal_handler;
+    
+    sa.sa_flags = SA_SIGINFO;
+    sa.sa_sigaction = signal_handler;
     ft_putstr("PID SERVER : ");
     ft_putnbr(getpid());
     ft_putchar('\n');
@@ -50,5 +59,4 @@ int main()
     while (1)
     {}
     return 0;
-
 }

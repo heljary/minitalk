@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: heljary <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: heljary <heljary@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:01:47 by heljary           #+#    #+#             */
-/*   Updated: 2025/01/27 13:01:50 by heljary          ###   ########.fr       */
+/*   Updated: 2025/03/19 00:39:24 by heljary          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 void	ft_putnbr(int n);
 void    ft_putstr(char *str);
 void	ft_putchar(char c);
-int     ft_atoi(const char *str);
+long     ft_atoi(const char *str);
 void    error_exit(char *msg);
 
 #endif

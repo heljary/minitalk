@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: heljary <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: heljary <heljary@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:00:01 by heljary           #+#    #+#             */
-/*   Updated: 2025/01/27 13:00:12 by heljary          ###   ########.fr       */
+/*   Updated: 2025/03/20 02:15:43 by heljary          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void send_sig(int pid,char c)
             }
         }
         bit++;
-        usleep(5);
+        usleep(100);
     } 
 }
 
@@ -48,12 +48,9 @@ int main(int ac,char **av)
     
     char *message = av[2];
     if(ac <= 2)
-    {
         ft_putstr("Error: ./client [server_pid] [message]\n");
-    }
     else if(pid <= 0)
         error_exit("Error: Invalid PID\n");
-
     while(message[i])
     {
         send_sig(pid,message[i]);

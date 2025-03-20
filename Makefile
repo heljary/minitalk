@@ -1,5 +1,7 @@
 NAME_SERVER = server
 NAME_CLIENT = client
+NAME_CLIENTBNS = b_client
+NAME_SERVERBNS = b_server
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
@@ -8,24 +10,36 @@ SERVER_SRC = server.c
 CLIENT_SRC = client.c
 UTILS_SRC = utils_func.c
 
+SERVER_BNS = ./bonus/server_bonus.c
+CLIENT_BNS = ./bonus/client_bonus.c
+UTILS_BNS = ./bonus/utils_func_bonus.c
+
 SERVER_OBJ = $(SERVER_SRC:.c=.o)
 CLIENT_OBJ = $(CLIENT_SRC:.c=.o)
 UTILS_OBJ = $(UTILS_SRC:.c=.o)
 
+SERVER_OBJ_BNS = $(SERVER_BNS:.c=.o)
+CLIENT_OBJ_BNS = $(CLIENT_BNS:.c=.o)
+UTILS_OBJ_BNS = $(UTILS_BNS:.c=.o)
+
 all: $(NAME_SERVER) $(NAME_CLIENT)
 
 $(NAME_SERVER): $(SERVER_OBJ) $(UTILS_OBJ)
- $(CC) $(CFLAGS) $(SERVER_OBJ) $(UTILS_OBJ) -o $(NAME_SERVER)
+	$(CC) $(CFLAGS) $(SERVER_OBJ) $(UTILS_OBJ) -o $(NAME_SERVER)
 
 $(NAME_CLIENT): $(CLIENT_OBJ) $(UTILS_OBJ)
- $(CC) $(CFLAGS) $(CLIENT_OBJ) $(UTILS_OBJ) -o $(NAME_CLIENT)
+	$(CC) $(CFLAGS) $(CLIENT_OBJ) $(UTILS_OBJ) -o $(NAME_CLIENT)
+
+bonus: $(NAME_CLIENTBNS) $(NAME_SERVERBNS)
+
+$(NAME_CLIENTBNS): $(CLIENT_OBJ_BNS) $(UTILS_OBJ_BNS)
+	$(CC) $(CFLAGS) $(CLIENT_OBJ_BNS) $(UTILS_OBJ_BNS) -o $(NAME_CLIENTBNS)
+
+$(NAME_SERVERBNS) : $(SERVER_OBJ_BNS) $(UTILS_OBJ_BNS)
+	$(CC) $(CFLAGS) $(SERVER_OBJ_BNS) $(UTILS_OBJ_BNS) -o $(NAME_SERVERBNS)
 
 clean:
- $(RM) $(SERVER_OBJ) $(CLIENT_OBJ) $(UTILS_OBJ)
+	$(RM) $(SERVER_OBJ) $(CLIENT_OBJ) $(UTILS_OBJ) $(SERVER_OBJ_BNS) $(CLIENT_OBJ_BNS) $(UTILS_OBJ_BNS)
 
 fclean: clean
- $(RM) $(NAME_SERVER) $(NAME_CLIENT)
-
-re: fclean all
-
-.PHONY: all clean fclean re
+	$(RM) $(NAME_SERVER) $(NAME_CLIENT) $(NAME_CLIENTBNS) $(NAME_SERVERBNS)
