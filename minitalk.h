@@ -14,14 +14,14 @@
 # define MINITALK_H
 # define _GNU_SOURCE
 # include <signal.h>
-# include <unistd.h>
-# include <stdlib.h>
 # include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 void	ft_putnbr(int n);
-void    ft_putstr(char *str);
+void	ft_putstr(char *str);
 void	ft_putchar(char c);
-long     ft_atoi(const char *str);
-void    error_exit(char *msg);
+long	ft_atoi(const char *str);
+void	error_exit(char *msg);
 
 #endif

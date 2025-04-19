@@ -6,7 +6,7 @@
 /*   By: heljary <heljary@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 19:31:21 by heljary           #+#    #+#             */
-/*   Updated: 2025/03/19 00:38:07 by heljary          ###   ########.fr       */
+/*   Updated: 2025/03/21 05:42:16 by heljary          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@ void	ft_putchar(char c)
 
 void	ft_putstr(char *str)
 {
-    int	len;
+	int	len;
+
 	len = 0;
-    if (!str)
+	if (!str)
 		return ;
 	while (str[len] != '\0')
 	{
@@ -53,17 +54,15 @@ void	ft_putnbr(int n)
 
 long	ft_atoi(const char *str)
 {
+	long	result;
 	int		i;
 	int		sign;
-	long		result;
 
 	i = 0;
 	sign = 1;
 	result = 0;
-	if(!str)
-	{
+	if (!str)
 		return (0);
-	}
 	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
 		i++;
 	if (str[i] == '-' || str[i] == '+')
@@ -76,16 +75,14 @@ long	ft_atoi(const char *str)
 	{
 		if (result > 2147483647)
 			return (-1);
-		if (result < -2147483648)
-			return (-1);
 		result = result * 10 + (str[i] - '0');
 		i++;
 	}
 	return (result * sign);
 }
 
-void    error_exit(char *msg)
+void	error_exit(char *msg)
 {
-    ft_putstr(msg);
-    exit(1);
+	ft_putstr(msg);
+	exit(1);
 }

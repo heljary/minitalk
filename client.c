@@ -6,55 +6,93 @@
 /*   By: heljary <heljary@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:00:01 by heljary           #+#    #+#             */
-/*   Updated: 2025/03/20 02:15:43 by heljary          ###   ########.fr       */
+/*   Updated: 2025/03/21 05:39:11 by heljary          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minitalk.h"
 
-#include "minitalk.h" 
-
-void send_sig(int pid,char c)
+void	send_sig(int pid, char c)
 {
-    int bit = 0;
-    while(bit < 8)
-    {
-        if(c & (1 << bit))
-        {
-            if(kill(pid, SIGUSR2) == -1)
-            {
-                error_exit("error to send signal 2 !");
-                ft_putchar('\n');
-            }
-        }
-        else
-        {
-            if(kill(pid, SIGUSR1) == -1)
-            {
-                error_exit("error to send signal 1 !");
-                ft_putchar('\n');
-            }
-        }
-        bit++;
-        usleep(100);
-    } 
+	int	bit;
+
+	bit = 0;
+	while (bit < 8)
+	{
+		if (c & (1 << bit))
+		{
+			if (kill(pid, SIGUSR2) == -1)
+			{
+				error_exit("error to send signal 2 !");
+				ft_putchar('\n');
+			}
+		}
+		else
+		{
+			if (kill(pid, SIGUSR1) == -1)
+			{
+				error_exit("error to send signal 1 !");
+				ft_putchar('\n');
+			}
+		}
+		bit++;
+		usleep(100);
+	}
 }
 
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
 
-int main(int ac,char **av)
-{   
+void	is_valid_number(char *str)
+{
+	int	i;
+	int	digit_found;
 
-    int i = 0;
-    int pid = ft_atoi(av[1]);
-    
-    char *message = av[2];
-    if(ac <= 2)
-        ft_putstr("Error: ./client [server_pid] [message]\n");
-    else if(pid <= 0)
-        error_exit("Error: Invalid PID\n");
-    while(message[i])
-    {
-        send_sig(pid,message[i]);
-        i++;
-    }
-    return 0;
+	i = 0;
+	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	if (str[i] == '+' || str[i] == '-')
+		i++;
+	digit_found = 0;
+	while (ft_isdigit(str[i]))
+	{
+		digit_found = 1;
+		i++;
+	}
+	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	if (str[i] != '\0' || !digit_found)
+	{
+		ft_putstr("Invalid argument.\n");
+		exit(1);
+	}
+}
+
+int	main(int ac, char **av)
+{
+	int		i;
+	int		pid;
+	char	*message;
+
+	if (ac != 3)
+	{
+		ft_putstr("Error: ./client [server_pid] [message]\n");
+		return (0);
+	}
+	i = 0;
+	is_valid_number(av[1]);
+	pid = ft_atoi(av[1]);
+	message = av[2];
+	if (pid <= 0)
+		error_exit("Error: Invalid PID\n");
+	while (message[i])
+	{
+		send_sig(pid, message[i]);
+		i++;
+	}
+	return (0);
 }

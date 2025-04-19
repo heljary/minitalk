@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_func_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: heljary <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: heljary <heljary@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 19:33:25 by heljary           #+#    #+#             */
-/*   Updated: 2025/01/28 19:33:48 by heljary          ###   ########.fr       */
+/*   Updated: 2025/03/21 03:49:24 by heljary          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@ void	ft_putchar(char c)
 
 void	ft_putstr(char *str)
 {
-    int	len;
+	int	len;
+
 	len = 0;
-    if (!str)
+	if (!str)
 		return ;
 	while (str[len] != '\0')
 	{
@@ -51,19 +52,17 @@ void	ft_putnbr(int n)
 		ft_putchar(n + 48);
 }
 
-int	ft_atoi(const char *str)
+long	ft_atoi(const char *str)
 {
+	long	result;
 	int		i;
 	int		sign;
-	int		result;
 
 	i = 0;
 	sign = 1;
 	result = 0;
-	if(!str)
-	{
+	if (!str)
 		return (0);
-	}
 	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
 		i++;
 	if (str[i] == '-' || str[i] == '+')
@@ -82,8 +81,8 @@ int	ft_atoi(const char *str)
 	return (result * sign);
 }
 
-void    error_exit(char *msg)
+void	error_exit(char *msg)
 {
-    ft_putstr(msg);
-    exit(1);
+	ft_putstr(msg);
+	exit(1);
 }
